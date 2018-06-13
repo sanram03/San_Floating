@@ -14,15 +14,19 @@ protocol SanFloatingTextDelegate {
 
 @IBDesignable class SanFloatingView: UIView
 {
+    //**Title**//
     private var headerTitle : String = ""
+    
+    //**User Entered Title**//
     @IBInspectable
-    public var title : String = "Name" {
+    public var title : String = "" {
         
         didSet{
             headerTitle = self.title
         }
     }
     
+    //**User Selected Color**//
     @IBInspectable
     public var color : UIColor = .clear {
         
@@ -31,18 +35,20 @@ protocol SanFloatingTextDelegate {
         }
     }
     
+    //**Title Label**//
     var titleLabel : UILabel = {
         let label = UILabel()
         label.textColor = .gray
         return label
     }()
     
+    //**TextField**//
     var textField : UITextField = {
         let txtField = UITextField()
-        
         return txtField
     }()
     
+    //**Bottom Line**//
     var bottomLayer : CALayer{
         let bottomLine = CALayer()
         bottomLine.backgroundColor = UIColor.black.cgColor
@@ -51,6 +57,7 @@ protocol SanFloatingTextDelegate {
     }
     
     var delegate : SanFloatingTextDelegate?
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,9 +75,9 @@ protocol SanFloatingTextDelegate {
         super.init(coder: aDecoder)
     }
     
+    //**SetUp label and textfield to view**//
     func setUpView()
     {
-        
         self.backgroundColor = .clear
         self.layer.addSublayer(bottomLayer)
         self.layer.cornerRadius = 5
@@ -85,8 +92,10 @@ protocol SanFloatingTextDelegate {
     
 }
 
+//**UITextField Delegate Function**//
 extension SanFloatingView: UITextFieldDelegate
 {
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("textFieldDidBeginEditing")
         UIView.animate(withDuration: 1.0, animations: {
